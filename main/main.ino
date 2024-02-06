@@ -1,7 +1,7 @@
 #include <ESP8266WiFi.h>        // Include the Wi-Fi library
 
-const char* ssid     = "1X4WDX3 8414";         // The SSID (name) of the Wi-Fi network you want to connect to
-const char* password = "lilleby00001";     // The password of the Wi-Fi network
+const char* ssid     = "IoT-Bouvet";         // The SSID (name) of the Wi-Fi network you want to connect to
+const char* password = "3k78AEtrBK7fTiLRc5";     // The password of the Wi-Fi network
 
 void setup() {
   Serial.begin(115200);         // Start the Serial communication to send messages to the computer
