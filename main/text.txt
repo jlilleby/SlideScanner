@@ -1,0 +1,73 @@
+create a ESP8266 webserver that have the following code and crete voids where needed :
+
+"timeForSwitch" is a text field that needs to be defined in the ESP8266 as an const int. The function of the text field is used to set the time the cassette takes to switch between slides
+"timeForInterval" is a text field that needs to be defined in the ESP8266 as an const int. The function of the text field is used to set the interval to allow images to be written to disk
+"timeForSettle" is a text field that needs to be defined in the ESP8266 as an const int.The function of the filed is used to set the time to make shure the slide is settled before triggering shutter
+"timeForComplete" is a text field that needs to be defined in the ESP8266 as an const int. the function of the text field is used to set the time it takes to complete the camera operation before we can advance to the next slide
+"totalSlides" is a text field that needs to be defined in the ESP8266 as an const int. the function of the filed is for the user to let the code know how many slides there is in the cassette so it automaticly stops advancing after the last slide. 
+
+"prevSlide"         = PIN D1
+"nextSlide"         = PIN D2
+"ShutterTrigger"    = PIN D3
+
+"prevSlide" and "nextSlide" will both trigger for "timeForSwitch" each time the buttons is pressed.
+"prevSlide" is a button to be defined in the ESP8266. every time it is pressed it needs to trigger the correct PIN.
+"nextSlide" is a button to be defined in the ESP8266. every time it is pressed it needs to trigger the correct PIN.
+
+"ShutterTrigger" will be triggered for "timeForComplete" each time the button is pressed. 
+"ShutterTrigger" is a button to be defined in the ESP8266. every time it is pressed it needs to trigger the correct PIN
+
+"startLoop" is a loop which when triggered it goes through each of the following functions and timers until the loop either hits "totalSlides" or "stopLoop". "startLoop" -> "nextSlide" -> "timeForSettle" -> "ShutterTrigger" -> "timeForInterval" -> back to top of loop
+"stopLoop" is an interupt that can stop the "startLoop" on button press. 
+
+"SaveValues" is a function that saves the values in each text field so that it is saved between runs or reset.
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slide Scanner Control</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h2>Slide Scanner Control</h2>
+    <!-- Form -->
+    <form id="slideForm">
+        <div class="form-group">
+            <label for="timeForSwitch">Time for cassette to switch from one slide to another:</label>
+            <input type="number" class="form-control" id="timeForSwitch" min="0" value="5">
+        </div>
+
+        <div class="form-group">
+            <label for="timeForInterval">Time between each slide action wait to send image to storage:</label>
+            <input type="number" class="form-control" id="timeForInterval" min="0" value="5">
+        </div>
+        
+        <div class="form-group">
+            <label for="timeForSettle">Time for slide to settle into place before shutter is triggered:</label>
+            <input type="number" class="form-control" id="timeForSettle" min="0" value="3">
+        </div>
+        
+        <div class="form-group">
+            <label for="timeForComplete">Time for camera to complete operation before a new slide can be inserted:</label>
+            <input type="number" class="form-control" id="timeForComplete" min="0" value="7">
+        </div>
+        
+        <div class="form-group">
+            <label for="totalSlides">Total number of slides to be scanned in the cassette:</label>
+            <input type="number" class="form-control" id="totalSlides" min="0" value="20">
+        </div>
+    </form>
+    
+    <!-- Buttons -->
+    <button id="prevSlide" class="btn btn-primary">Previous Slide</button>
+    <button id="nextSlide" class="btn btn-primary">Next Slide</button>
+    <button id="ShutterTrigger" class="btn btn-primary">Trigger Sensor</button>
+    <button id="startLoop" class="btn btn-success">Start Loop</button>
+    <button id="stopLoop" class="btn btn-danger">Stop Loop</button>
+    <button id="SaveValues" class="btn btn-success">Save Values</button>
+</div>
+</body>
+</html>
