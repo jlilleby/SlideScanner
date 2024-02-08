@@ -17,7 +17,48 @@ ESP8266WebServer server(80);
 bool loopRunning = false;
 
 void handleRoot() {
-  String html = "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Slide Scanner Control</title><link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\"></head><body><div class=\"container\"><h2>Slide Scanner Control</h2><form id=\"slideForm\"><div class=\"form-group\"><label for=\"timeForSwitch\">Time for cassette to switch from one slide to another:</label><input type=\"number\" class=\"form-control\" id=\"timeForSwitch\" min=\"0\" value=\"" + String(timeForSwitch) + "\"></div><div class=\"form-group\"><label for=\"timeForInterval\">Time between each slide action wait to send image to storage:</label><input type=\"number\" class=\"form-control\" id=\"timeForInterval\" min=\"0\" value=\"" + String(timeForInterval) + "\"></div><div class=\"form-group\"><label for=\"timeForSettle\">Time for slide to settle into place before shutter is triggered:</label><input type=\"number\" class=\"form-control\" id=\"timeForSettle\" min=\"0\" value=\"" + String(timeForSettle) + "\"></div><div class=\"form-group\"><label for=\"timeForComplete\">Time for camera to complete operation before a new slide can be inserted:</label><input type=\"number\" class=\"form-control\" id=\"timeForComplete\" min=\"0\" value=\"" + String(timeForComplete) + "\"></div><div class=\"form-group\"><label for=\"totalSlides\">Total number of slides to be scanned in the cassette:</label><input type=\"number\" class=\"form-control\" id=\"totalSlides\" min=\"0\" value=\"" + String(totalSlides) + "\"></div></form><button id=\"prevSlide\" class=\"btn btn-primary\">Previous Slide</button><button id=\"nextSlide\" class=\"btn btn-primary\">Next Slide</button><button id=\"ShutterTrigger\" class=\"btn btn-primary\">Trigger Sensor</button><button id=\"startLoop\" class=\"btn btn-success\">Start Loop</button><button id=\"stopLoop\" class=\"btn btn-danger\">Stop Loop</button><button id=\"SaveValues\" class=\"btn btn-success\">Save Values</button></div></body></html>";
+    String html = "<!DOCTYPE html>\n"
+                "<html lang=\"en\">\n"
+                "<head>\n"
+                "<meta charset=\"UTF-8\">\n"
+                "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
+                "<title>Slide Scanner Control</title>\n"
+                "<link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\">\n"
+                "</head>\n"
+                "<body>\n"
+                "<div class=\"container\">\n"
+                "<h2>Slide Scanner Control</h2>\n"
+                "<form id=\"slideForm\">\n"
+                "<div class=\"form-group\">\n"
+                "<label for=\"timeForSwitch\">Time for cassette to switch from one slide to another:</label>\n"
+                "<input type=\"number\" class=\"form-control\" id=\"timeForSwitch\" min=\"0\" value=\"" + String(timeForSwitch) + "\">\n"
+                "</div>\n"
+                "<div class=\"form-group\">\n"
+                "<label for=\"timeForInterval\">Time between each slide action wait to send image to storage:</label>\n"
+                "<input type=\"number\" class=\"form-control\" id=\"timeForInterval\" min=\"0\" value=\"" + String(timeForInterval) + "\">\n"
+                "</div>\n"
+                "<div class=\"form-group\">\n"
+                "<label for=\"timeForSettle\">Time for slide to settle into place before shutter is triggered:</label>\n"
+                "<input type=\"number\" class=\"form-control\" id=\"timeForSettle\" min=\"0\" value=\"" + String(timeForSettle) + "\">\n"
+                "</div>\n"
+                "<div class=\"form-group\">\n"
+                "<label for=\"timeForComplete\">Time for camera to complete operation before a new slide can be inserted:</label>\n"
+                "<input type=\"number\" class=\"form-control\" id=\"timeForComplete\" min=\"0\" value=\"" + String(timeForComplete) + "\">\n"
+                "</div>\n"
+                "<div class=\"form-group\">\n"
+                "<label for=\"totalSlides\">Total number of slides to be scanned in the cassette:</label>\n"
+                "<input type=\"number\" class=\"form-control\" id=\"totalSlides\" min=\"0\" value=\"" + String(totalSlides) + "\">\n"
+                "</div>\n"
+                "</form>\n"
+                "<button id=\"prevSlide\" class=\"btn btn-primary\">Previous Slide</button>\n"
+                "<button id=\"nextSlide\" class=\"btn btn-primary\">Next Slide</button>\n"
+                "<button id=\"ShutterTrigger\" class=\"btn btn-primary\">Trigger Sensor</button>\n"
+                "<button id=\"startLoop\" class=\"btn btn-success\">Start Loop</button>\n"
+                "<button id=\"stopLoop\" class=\"btn btn-danger\">Stop Loop</button>\n"
+                "<button id=\"SaveValues\" class=\"btn btn-success\">Save Values</button>\n"
+                "</div>\n"
+                "</body>\n"
+                "</html>\n";
   server.send(200, "text/html", html);
 }
 
@@ -42,7 +83,6 @@ void shutterTrigger() {
   delay(timeForComplete);
   digitalWrite(shutterTriggerPin, LOW);
 }
-
 
 void startLoop() {
   if (!loopRunning) {
