@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESP8266 Web Interface</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Add any additional custom styles here */
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 class="text-center">35mm Slide Scanner</h1>
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+      	<form action="/UpdateSlideCout" method="get">        	
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Number of Slides to scan" aria-label="Number of Slides to scan" aria-describedby="button-addon2">
+            <button class="btn btn-outline-secondary" type="button" id="button-addon2">Update</button>
+          </div>
+        </form>
+        <form action="/ReverseSlide" method="get">
+          <button type="submit" class="btn btn-primary btn-block mb-3">Reverse Slide</button>
+        </form>
+        <form action="/ForwardSlide" method="get">
+          <button type="submit" class="btn btn-success btn-block mb-3">Forward Slide</button>
+        </form>
+        <form action="/Shutter" method="get">
+          <button type="submit" class="btn btn-warning btn-block mb-3">Trigger Shutter</button>
+        </form>
+        <form action="/StartLoop" method="get">
+          <button type="submit" class="btn btn-info btn-block mb-3">Start</button>
+        </form>
+        <form action="/StopLoop" method="get">
+          <button type="submit" class="btn btn-danger btn-block mb-3">Stop</button>
+        </form>
+      </div>
+    </div>
+  </div>
+<div class="container">
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <div class="col-md-4 d-flex align-items-center">
+      <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+        <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+      </a>
+      <span class="mb-3 mb-md-0 text-body-secondary">© 2023 Company, Inc</span>
+    </div>
+
+    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+      
+    </ul>
+  </footer>
+</div>
+  <!-- Bootstrap JS (optional if you need JavaScript features from Bootstrap) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
